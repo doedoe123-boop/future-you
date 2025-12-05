@@ -4,7 +4,7 @@ import { useState } from "react";
 import Landing from "@/components/Landing";
 import Quiz from "@/components/Quiz";
 import Result from "@/components/Result";
-import { generateDynamicQuestions } from "@/lib/questionGenerator";
+import { getRandomQuestions } from "@/lib/questionBank";
 import { generateFuturePrediction } from "@/lib/futureGenerator";
 import { QuizAnswers, FuturePrediction, QuizQuestion } from "@/lib/types";
 
@@ -14,7 +14,7 @@ export default function Home() {
   const [appState, setAppState] = useState<AppState>("landing");
   const [prediction, setPrediction] = useState<FuturePrediction | null>(null);
   const [questions, setQuestions] = useState<QuizQuestion[]>(() =>
-    generateDynamicQuestions(10)
+    getRandomQuestions(10)
   );
 
   const handleStartQuiz = () => {
@@ -22,14 +22,14 @@ export default function Home() {
   };
 
   const handleQuizComplete = (answers: QuizAnswers) => {
-    const result = generateFuturePrediction(answers);
+    const result = generateFuturePrediction(answers, questions);
     setPrediction(result);
     setAppState("result");
   };
 
   const handleRetry = () => {
     setPrediction(null);
-    setQuestions(generateDynamicQuestions(10)); // Generate new questions for next quiz
+    setQuestions(getRandomQuestions(10)); // Get new random questions for next quiz
     setAppState("landing");
   };
 

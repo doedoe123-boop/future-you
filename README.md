@@ -60,95 +60,6 @@ A fun, interactive web app that predicts your hilarious future persona based on 
 - Share your future on Twitter/X, Facebook, LinkedIn
 - Copy to clipboard functionality
 
-## 🛠️ Tech Stack
-
-- **Framework:** Next.js 16 with App Router
-- **Language:** TypeScript
-- **Styling:** TailwindCSS 4
-- **Animations:** CSS Keyframes + Custom animations
-- **Confetti:** canvas-confetti
-- **Audio:** Web Audio API (no external files needed)
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm, yarn, pnpm, or bun
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/future-you.git
-cd future-you
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see the app!
-
-### Build for Production
-
-```bash
-npm run build
-npm start
-```
-
-## 📁 Project Structure
-
-```
-src/
-├── app/
-│   ├── globals.css      # Theme, animations, cosmic effects
-│   ├── layout.tsx       # Root layout with metadata
-│   └── page.tsx         # Main app controller
-├── components/
-│   ├── Landing.tsx      # Landing page with stats
-│   ├── Quiz.tsx         # Quiz with unique slide animations
-│   └── Result.tsx       # Results with rocket launch & radar chart
-└── lib/
-    ├── types.ts         # TypeScript interfaces
-    ├── questionGenerator.ts  # Dynamic question algorithm
-    └── futureGenerator.ts    # Prediction generator
-```
-
-## 🎨 Customization
-
-### Adding New Question Templates
-
-Edit `src/lib/questionGenerator.ts` to add new question templates:
-
-```typescript
-private questionTemplates: QuestionTemplate[] = [
-  {
-    template: "Your custom question with {variable}?",
-    variables: { variable: ["option1", "option2", "option3"] },
-    emoji: "🎯"
-  },
-  // ... more templates
-];
-```
-
-### Modifying Slide Themes
-
-Edit `src/components/Quiz.tsx` to customize the cosmic zone themes:
-
-```typescript
-const slideThemes = [
-  {
-    name: "nebula",
-    title: "Entering the Nebula",
-    bgColor: "from-purple-900/30 to-pink-900/20",
-  },
-  // ... customize themes
-];
-```
-
 ## 🌟 Screenshots
 
 | Landing                  | Quiz                      | Result                  |
@@ -158,12 +69,6 @@ const slideThemes = [
 ## 📄 License
 
 MIT License - feel free to use this for your own projects!
-
-## 🙏 Acknowledgments
-
-- Built with [Next.js](https://nextjs.org/)
-- Styled with [TailwindCSS](https://tailwindcss.com/)
-- Confetti by [canvas-confetti](https://www.npmjs.com/package/canvas-confetti)
 
 ---
 

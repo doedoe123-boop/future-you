@@ -1,21 +1,13 @@
 "use client";
 
-import { useMemo } from "react";
-import { QuestionGenerator } from "@/lib/questionGenerator";
+import { getTotalQuestionCount } from "@/lib/questionBank";
 
 interface LandingProps {
   onStart: () => void;
 }
 
 export default function Landing({ onStart }: LandingProps) {
-  // Calculate total possible unique questions
-  const uniqueCount = useMemo(() => {
-    const count = QuestionGenerator.getUniqueQuestionCount();
-    if (count >= 1000000000) return `${(count / 1000000000).toFixed(1)}B+`;
-    if (count >= 1000000) return `${(count / 1000000).toFixed(1)}M+`;
-    if (count >= 1000) return `${(count / 1000).toFixed(1)}K+`;
-    return count.toString();
-  }, []);
+  const totalQuestions = getTotalQuestionCount();
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8 relative overflow-hidden">
@@ -45,7 +37,7 @@ export default function Landing({ onStart }: LandingProps) {
           Discover your hilarious future persona!
         </p>
         <p className="text-lg text-gray-400 mb-12">
-          Answer 5 dynamically generated questions and reveal what destiny has
+          Answer 10 curated questions and reveal what destiny has
           in store ✨
         </p>
 
@@ -65,14 +57,14 @@ export default function Landing({ onStart }: LandingProps) {
         {/* Fun Stats */}
         <div className="mt-16 flex justify-center gap-8 text-gray-400">
           <div className="text-center">
-            <div className="text-3xl font-bold text-purple-400">10</div>
-            <div className="text-sm">Random Questions</div>
+            <div className="text-3xl font-bold text-purple-400">{totalQuestions}+</div>
+            <div className="text-sm">Curated Questions</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-pink-400">
-              {uniqueCount}
+              10
             </div>
-            <div className="text-sm">Unique Combos</div>
+            <div className="text-sm">Per Quiz</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-cyan-400">100%</div>

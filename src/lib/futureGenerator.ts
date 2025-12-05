@@ -3,8 +3,9 @@ import {
   FuturePrediction,
   PersonalityScore,
   PersonalityTrait,
+  QuizQuestion,
 } from "./types";
-import { quizQuestions } from "./quizData";
+import { questionBank } from "./questionBank";
 
 // Fun job titles based on personality
 const jobTitles: Record<PersonalityTrait, string[]> = {
@@ -134,7 +135,7 @@ const narrativeTemplates: Record<PersonalityTrait, string[]> = {
   ],
 };
 
-function calculatePersonalityScore(answers: QuizAnswers): PersonalityScore {
+function calculatePersonalityScore(answers: QuizAnswers, questions: QuizQuestion[]): PersonalityScore {
   const score: PersonalityScore = {
     creative: 0,
     ambitious: 0,
@@ -145,11 +146,11 @@ function calculatePersonalityScore(answers: QuizAnswers): PersonalityScore {
   };
 
   Object.entries(answers).forEach(([questionId, optionId]) => {
-    const question = quizQuestions.find((q) => q.id === parseInt(questionId));
+    const question = questions.find((q) => String(q.id) === String(questionId));
     if (question) {
       const selectedOption = question.options.find((o) => o.id === optionId);
       if (selectedOption) {
-        score[selectedOption.personality] += 1;
+        score[selectedOption.trait] += 1;
       }
     }
   });
@@ -174,9 +175,11 @@ function getRandomItem<T>(array: T[]): T {
 }
 
 export function generateFuturePrediction(
-  answers: QuizAnswers
+  answers: QuizAnswers,
+  questions?: QuizQuestion[]
 ): FuturePrediction {
-  const score = calculatePersonalityScore(answers);
+  const questionsToUse = questions || questionBank;
+  const score = calculatePersonalityScore(answers, questionsToUse);
   const dominantTrait = getDominantTrait(score);
 
   const title = getRandomItem(jobTitles[dominantTrait]);

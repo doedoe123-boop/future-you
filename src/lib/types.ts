@@ -1,5 +1,5 @@
 export interface QuizQuestion {
-  id: number;
+  id: string | number;
   question: string;
   emoji: string;
   options: QuizOption[];
@@ -9,7 +9,7 @@ export interface QuizOption {
   id: string;
   text: string;
   emoji: string;
-  personality: PersonalityTrait;
+  trait: PersonalityTrait;
 }
 
 export type PersonalityTrait =
@@ -21,7 +21,7 @@ export type PersonalityTrait =
   | "relaxed";
 
 export interface QuizAnswers {
-  [questionId: number]: string;
+  [questionId: string]: string;
 }
 
 export interface FuturePrediction {
